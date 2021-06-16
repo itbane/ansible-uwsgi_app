@@ -1,0 +1,4 @@
+[uwsgi]
+{% for opt in uwsgi_app__config %}
+{{ opt }} = {{ uwsgi_app__config[opt] }}
+{% endfor %}

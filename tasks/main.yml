@@ -1,0 +1,9 @@
+---
+- name: Create service config
+  ansible.builtin.template:
+    dest: "/etc/uwsgi/{{ uwsgi_app__name }}.ini"
+    src: service.j2
+    mode: 0644
+    owner: root
+    group: root
+...
