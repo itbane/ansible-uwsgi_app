@@ -4,7 +4,7 @@ This role configures a new uwsgi service.
 
 ## Dependencies
 
-This role uses [uwsgi](https://github.com/itbane/uwsgi) to install uwsgi itself.
+This role uses [uwsgi](https://github.com/itbane/ansible-uwsgi) to install uwsgi itself.
 
 ## Variables
 
