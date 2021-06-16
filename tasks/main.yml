@@ -6,4 +6,29 @@
     mode: 0644
     owner: root
     group: root
+  notify: "restart_{{ uwsgi_app__name }}"
+- name: Ensure service is running
+  ansible.builtin.service:
+    name: "uwsgi@{{ uwsgi_app__name }}"
+    state: started
+- name: ensure override folder exists or is deleted
+  ansible.builtin.file:
+    path: "/etc/systemd/system/uwsgi@{{ uwsgi_app__name }}.service.d"
+    state: "{{ 'directory' if uwsgi_app__systemd_config | length > 0 else 'absent' }}"
+  register: systemdfolder
+  notify: "restart_{{ uwsgi_app__name }}"
+- name: create the override config
+  ansible.builtin.template:
+    dest: "/etc/systemd/system/uwsgi@{{ uwsgi_app__name }}.service.d/override.conf"
+    src: systemd-override.conf.j2
+    mode: 0644
+    owner: root
+    group: root
+  register: systemdconf
+  when: "uwsgi_app__systemd_config | length > 0"
+- name: reload systemd daemon
+  ansible.builtin.systemd:
+    daemon_reload: yes
+  when: "systemdconf.changed or systemdfolder.changed"
+  notify: "restart_{{ uwsgi_app__name }}"
 ...

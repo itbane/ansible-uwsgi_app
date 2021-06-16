@@ -1,0 +1,5 @@
+---
+uwsgi_app__name: ~
+uwsgi_app__config: {}
+uwsgi_app__systemd_config: {}
+...

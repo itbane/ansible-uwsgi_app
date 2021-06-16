@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+{% for part in uwsgi_app__systemd_config %}
+[{{ part }}]
+{% for name, value in uwsgi_app__systemd_config[part].items() %}
+{{ name }} = {{ value }}
+{% endfor %}
+{% endfor %}

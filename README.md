@@ -2,12 +2,17 @@
 
 This role configures a new uwsgi service.
 
+## Dependencies
+
+This role uses [uwsgi](https://github.com/itbane/uwsgi) to install uwsgi itself.
+
 ## Variables
 
 | variables | default | description |
 | --------- | ------- | ----------- |
 | uwsgi_app__name | - | A name for the app - will be used as file- and servicename |
-| uwsig_app__config | `{}` | A dict containing key/value pairs that will be written to the `ini`-File | 
+| uwsgi_app__config | `{}` | A dict containing key/value pairs that will be written to the `ini`-File | 
+| uwsgi_app__systemd_config | `{}` | A dict containing key/value pairs that will be written to an systemd-override-file to extend uwsgi service configuration |
 
 ## Usage:
 
